@@ -8,17 +8,11 @@ if (isset($_POST['connexion']))
         // on teste si une entrée de la base contient ce couple login / pass
         $email=$_POST['email'];
         $password=$_POST['password'];
-        #$result=mysqli_query($con, 'select * from login where email="'.$email.'" and password="'.$password.'"');
+
         $sql="SELECT COUNT(id) as rows,id,name,email,password,type FROM login WHERE email='$email' AND password='$password'";
         $res=mysqli_query($con,$sql) or die("erreur:".mysqli_error($con));
         $data=mysqli_fetch_assoc($res);
-        // si on obtient une réponse, alors l'utilisateur est un membre
-        /*$type=$data['type'];
-        $name=$data['name'];
-        $mail=$data['email'];
-        $pass=$data['password'];*/
 
-        #if ($mail=$_POST['email'] && $_POST['password']==$pass)
         if($data['rows']>0)
         {
             session_start();
